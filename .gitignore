@@ -35,3 +35,12 @@ hs_err_pid*
 **/*.exe
 **/*.bat
 **/apache-tomcat-8.5.24-windows-x64/
+
+### Eclipse
+**/*.project
+**/*.classpath
+**/*.settings
+**/*.gitignore
+
+### repositorio
+**/.git/
