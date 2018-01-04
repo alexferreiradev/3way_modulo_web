@@ -32,8 +32,9 @@ public class HelloServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println("<html>" + "<head><title>Hello</title></head>");
 		out.println("<body bgcolor=\"#ffffff\">" + "<h2>Olá, meu nome é Servlet. Qual é o seu nome?</h2>"
-				+ "<form method=\"get\">" + "<input type=\"text\" name=\"nome\" size=\"25\">" + "<p></p>"
+				+ "<form method=\"post\">" + "<input type=\"text\" name=\"nome\" size=\"25\">" + "<p></p>"
 				+ "<input type=\"submit\" value=\"Enviar\">" + "<input type=\"reset\" value=\"Resetar\">" + "</form>");
+		
 		String nome = request.getParameter("nome");
 		if ((nome != null) && (nome.length() > 0)) {
 			out.println("<h2>Olá, " + nome + "! ");
