@@ -3,4 +3,5 @@
   <groupId>3way</groupId>
   <artifactId>workload_livraria</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
 </project>
