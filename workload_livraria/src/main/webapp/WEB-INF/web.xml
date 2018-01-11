@@ -20,6 +20,6 @@
 	
 	<servlet-mapping>
 		<servlet-name>livro</servlet-name>
-		<url-pattern>/livro</url-pattern>		
+		<url-pattern>/livro</url-pattern>			
 	</servlet-mapping>
 </web-app>
