@@ -12,6 +12,7 @@ public class Livro {
 	private double preco;
 	private byte[] imagem;
 
+	public static final String NOME_COL_ID_LIVRO = "id";
 	public static final String NOME_COL_AUTOR_LIVRO = "autor";
 	public static final String NOME_COL_COD_LIVRO = "cod_livro";
 	public static final String NOME_COL_TITULO_LIVRO = "titulo";

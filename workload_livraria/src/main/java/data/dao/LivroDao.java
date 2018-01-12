@@ -20,11 +20,11 @@ public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 		try (Connection con = FabricaConexao.getConnection();) {
 			PreparedStatement ps = con.prepareStatement(Livro.CREATE_LIVRO);
 			ps.setString(1, modelo.getCodigo());
-			ps.setString(3, modelo.getTitulo());
-			ps.setString(4, modelo.getDescricao());
-			ps.setString(5, modelo.getAutor());
-			ps.setDouble(6, modelo.getPreco());
-			ps.setBytes(7, modelo.getImagem());
+			ps.setString(2, modelo.getTitulo());
+			ps.setString(3, modelo.getDescricao());
+			ps.setString(4, modelo.getAutor());
+			ps.setDouble(5, modelo.getPreco());
+			ps.setBytes(6, modelo.getImagem());
 
 			ResultSet resultadoBanco = ps.executeQuery();
 			Livro livro = criaObjetoLivroFromResultSet(resultadoBanco);
@@ -87,6 +87,7 @@ public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 
 	private Livro criaObjetoLivroFromResultSet(ResultSet resultadoBanco) throws SQLException {
 		Livro livro = new Livro();
+		livro.setId(resultadoBanco.getLong(Livro.NOME_COL_ID_LIVRO));
 		livro.setCodigo(resultadoBanco.getString(Livro.NOME_COL_COD_LIVRO));
 		livro.setTitulo(resultadoBanco.getString(Livro.NOME_COL_TITULO_LIVRO));
 		livro.setDescricao(resultadoBanco.getString(Livro.NOME_COL_DESC_LIVRO));
