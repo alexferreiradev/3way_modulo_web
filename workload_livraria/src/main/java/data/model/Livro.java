@@ -11,6 +11,19 @@ public class Livro {
 	private String descricao;
 	private double preco;
 	private byte[] imagem;
+
+	public static final String NOME_COL_ID_LIVRO = "id";
+	public static final String NOME_COL_AUTOR_LIVRO = "autor";
+	public static final String NOME_COL_COD_LIVRO = "cod_livro";
+	public static final String NOME_COL_TITULO_LIVRO = "titulo";
+	public static final String NOME_COL_DESC_LIVRO = "descricao";
+	public static final String NOME_COL_PRECO_LIVRO = "preco";
+	public static final String NOME_COL_IMAGEM_LIVRO = "imagem";
+	
+	public static final String DELETE_LIVRO = "DELETE from estoque e where e.id = ?;";
+	public static final String CREATE_LIVRO = "INSERT into estoque (cod_livro, titulo, descricao, autor, preco, imagem) values(?, ?, ?, ?, ?, ?);";
+	public static final String UPDATE_LIVRO = "UPDATE estoque e set e.? = ? where e.id = ?;";
+	
 	public Livro() {
 		super();
 	}
