@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.dao.conection.FabricaConexao;
+import data.dao.exception.DAOException;
 import data.model.Livro;
 
 public class LivroDao implements Dao<Livro>, ProjecoesLivro {
@@ -16,7 +17,7 @@ public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 	private static final String OBTER_LIVROS_POR_CHAVE_VALOR = "Select * from estoque e where e.? like ?;";
 
 	@Override
-	public Livro create(Livro modelo) {
+	public Livro create(Livro modelo) throws DAOException{
 		try (Connection con = FabricaConexao.getConnection();) {
 			PreparedStatement ps = con.prepareStatement(Livro.CREATE_LIVRO);
 			ps.setString(1, modelo.getCodigo());
@@ -32,13 +33,15 @@ public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 			return livro;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new DAOException("Erro de SQL.", e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DAOException(e);
 		}
-
-		return null;
 	}
 	
 	@Override
-	public Livro recuperar(long id) {
+	public Livro recuperar(long id) throws DAOException{
 		try (Connection con = FabricaConexao.getConnection();) {
 			PreparedStatement ps = con.prepareStatement(OBTER_LIVRO_COD);
 			ps.setInt(1, Integer.parseInt(String.valueOf(id)));
@@ -49,13 +52,15 @@ public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 			return livro;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new DAOException("Erro de SQL.", e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DAOException(e);
 		}
-
-		return null;
 	}
 
 	@Override
-	public List<Livro> livrosPorChaveValor(String chave, String valor) {
+	public List<Livro> livrosPorChaveValor(String chave, String valor) throws DAOException{
 		List<Livro> livros = new ArrayList<>();
 
 		try (Connection con = FabricaConexao.getConnection();) {
@@ -65,40 +70,52 @@ public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 
 			ResultSet resultadoBanco = ps.executeQuery();
 			while (resultadoBanco.next()) {
-
 				livros.add(criaObjetoLivroFromResultSet(resultadoBanco));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new DAOException("Erro de SQL.", e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DAOException(e);
 		}
 
 		return livros;
 	}
 
 	@Override
-	public List<Livro> livrosPorCodigo(String codigo) {
+	public List<Livro> livrosPorCodigo(String codigo) throws DAOException {
 		return livrosPorChaveValor(Livro.NOME_COL_COD_LIVRO, codigo);
 	}
 
 	@Override
-	public List<Livro> livrosPorPreco(double preco) {
+	public List<Livro> livrosPorPreco(double preco) throws DAOException {
 		return livrosPorChaveValor(Livro.NOME_COL_PRECO_LIVRO, String.valueOf(preco));
 	}
 
-	private Livro criaObjetoLivroFromResultSet(ResultSet resultadoBanco) throws SQLException {
+	private Livro criaObjetoLivroFromResultSet(ResultSet resultadoBanco) throws DAOException{
 		Livro livro = new Livro();
-		livro.setId(resultadoBanco.getLong(Livro.NOME_COL_ID_LIVRO));
-		livro.setCodigo(resultadoBanco.getString(Livro.NOME_COL_COD_LIVRO));
-		livro.setTitulo(resultadoBanco.getString(Livro.NOME_COL_TITULO_LIVRO));
-		livro.setDescricao(resultadoBanco.getString(Livro.NOME_COL_DESC_LIVRO));
-		livro.setAutor(resultadoBanco.getString(Livro.NOME_COL_AUTOR_LIVRO));
-		livro.setImagem(resultadoBanco.getBytes(Livro.NOME_COL_IMAGEM_LIVRO));
-		livro.setPreco(resultadoBanco.getDouble(Livro.NOME_COL_PRECO_LIVRO));
+		try {
+			livro.setId(resultadoBanco.getLong(Livro.NOME_COL_ID_LIVRO));
+			livro.setCodigo(resultadoBanco.getString(Livro.NOME_COL_COD_LIVRO));
+			livro.setTitulo(resultadoBanco.getString(Livro.NOME_COL_TITULO_LIVRO));
+			livro.setDescricao(resultadoBanco.getString(Livro.NOME_COL_DESC_LIVRO));
+			livro.setAutor(resultadoBanco.getString(Livro.NOME_COL_AUTOR_LIVRO));
+			livro.setImagem(resultadoBanco.getBytes(Livro.NOME_COL_IMAGEM_LIVRO));
+			livro.setPreco(resultadoBanco.getDouble(Livro.NOME_COL_PRECO_LIVRO));
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("Erro ao buscar elemento no banco.", e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DAOException(e);
+		}
+		
 		return livro;
 	}
 
 	@Override
-	public Livro update(long id, String chave, String valor) {
+	public Livro update(long id, String chave, String valor) throws DAOException {
 		try (Connection con = FabricaConexao.getConnection();){
 			PreparedStatement ps = con.prepareStatement(Livro.UPDATE_LIVRO);
 			ps.setString(1, chave);
@@ -119,7 +136,7 @@ public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 	}
 
 	@Override
-	public Livro delete(Livro modelo) {
+	public Livro delete(Livro modelo) throws DAOException {
 		try (Connection con = FabricaConexao.getConnection();){
 			PreparedStatement ps = con.prepareStatement(Livro.DELETE_LIVRO);
 			ps.setString(1, String.valueOf(modelo.getId()));
@@ -132,8 +149,10 @@ public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new DAOException("Erro de SQL no banco.", e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DAOException(e);
 		}
-		
-		return null;
 	}
 }
