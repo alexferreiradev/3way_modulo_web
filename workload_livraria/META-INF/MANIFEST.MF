@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: workload_livraria
+Bundle-SymbolicName: workload_livraria
+Bundle-Version: 1.0.0.qualifier
+Export-Package: controller,
+ data.dao,
+ data.dao.conection,
+ data.dao.exception,
+ data.model,
+ service,
+ service.exception
