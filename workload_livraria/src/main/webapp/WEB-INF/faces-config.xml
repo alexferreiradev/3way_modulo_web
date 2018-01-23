@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<faces-config
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
-    version="2.1">
-
+<faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xi="http://www.w3.org/2001/XInclude"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+ <managed-bean eager="true">
+  <managed-bean-name>livro</managed-bean-name>
+  <managed-bean-class>data.model.Livro</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>livroService</managed-bean-name>
+  <managed-bean-class>service.LivroService</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+ <managed-bean eager="false">
+  <description>s</description>
+  <managed-bean-name>livroDao</managed-bean-name>
+  <managed-bean-class>data.dao.LivroDao</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <navigation-rule>
+  <display-name>index</display-name>
+  <from-view-id>/index.html</from-view-id>
+  <navigation-case>
+   <from-action>#{livroService.listaLivros()}</from-action>
+   <to-view-id>/pages/lista_livros.jsp</to-view-id>
+  </navigation-case>
+ </navigation-rule>
 </faces-config>

@@ -36,7 +36,7 @@ public class LivroController extends HttpServlet {
 	private void listarLivros(HttpServletRequest req, HttpServletResponse resp) {
 		LivroService livroService = new LivroService();
 		try {
-			List<Livro> livros = livroService.listLivros();
+			List<Livro> livros = livroService.listaLivros();
 			req.setAttribute("livros", livros);
 			
 			RequestDispatcher rd = req.getRequestDispatcher("/pages/lista_livros.jsp");

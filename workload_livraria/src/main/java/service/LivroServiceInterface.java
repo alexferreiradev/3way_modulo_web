@@ -7,6 +7,6 @@ import service.exception.ServiceException;
 
 public interface LivroServiceInterface {
 	
-	List<Livro> listLivros() throws ServiceException;
+	List<Livro> listaLivros() throws ServiceException;
 
 }

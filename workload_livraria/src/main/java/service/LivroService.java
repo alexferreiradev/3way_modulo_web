@@ -10,8 +10,10 @@ import service.exception.ServiceException;
 
 public class LivroService implements LivroServiceInterface {
 
+	private service.LivroService listaLivros;
+
 	@Override
-	public List<Livro> listLivros() throws ServiceException {
+	public List<Livro> listaLivros() throws ServiceException {
 		List<Livro> livros = new ArrayList<>();
 		
 		try {
@@ -30,5 +32,18 @@ public class LivroService implements LivroServiceInterface {
 		
 		return livros;
 	}
+
+	
+	public service.LivroService getListaLivros() {
+		return listaLivros;
+	}
+
+
+	
+	public void setListaLivros(service.LivroService listaLivros) {
+		this.listaLivros = listaLivros;
+	}
+
+
 
 }
