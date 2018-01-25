@@ -7,10 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.NoneScoped;
+
 import data.dao.conection.FabricaConexao;
 import data.dao.exception.DAOException;
 import data.model.Livro;
 
+@NoneScoped
+@ManagedBean
 public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 
 	private static final String OBTER_LIVRO_COD = "" + "Select * from estoque e where e.cod_livro = ?;";

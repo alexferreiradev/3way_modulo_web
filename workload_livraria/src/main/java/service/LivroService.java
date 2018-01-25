@@ -3,19 +3,24 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
 import data.dao.LivroDao;
 import data.dao.exception.DAOException;
 import data.model.Livro;
 import service.exception.ServiceException;
 
+@ManagedBean(name="livroService")
+@RequestScoped
 public class LivroService implements LivroServiceInterface {
+	private LivroDao livroDao;
 
 	@Override
 	public List<Livro> listLivros() throws ServiceException {
 		List<Livro> livros = new ArrayList<>();
 		
 		try {
-			LivroDao livroDao = new LivroDao();
 			List<Livro> livrosPorPreco = livroDao.livrosPorPreco(0);
 			if (livrosPorPreco != null) {
 				livros = livrosPorPreco;
