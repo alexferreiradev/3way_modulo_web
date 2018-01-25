@@ -4,13 +4,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Livros</title>
-</h:head>
-<h:body>
-	<ui:debug hotkey="d" />
 	<ui:composition template="/pages/templates/layout.xhtml">
+		<ui:define name="title-head">
+			Titulo setado
+		</ui:define>
 		<ui:define name="content">
 			Lista de livros:<br />
 			<ul>
@@ -22,5 +19,4 @@
 			Fim da lista
 		</ui:define>
 	</ui:composition>
-</h:body>
 </html>
