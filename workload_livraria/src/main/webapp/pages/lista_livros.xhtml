@@ -12,7 +12,7 @@
 	<ui:composition template="/pages/templates/layout.xhtml">
 		<ui:define name="content">
 			<ui:repeat var="livro" value="#{livroService.listLivros()}">
-				<h:outputText>#{livro}</h:outputText>
+				<h:outputText>#{livro.titulo}</h:outputText>
 			</ui:repeat>
 		</ui:define>
 	</ui:composition>
