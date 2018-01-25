@@ -92,7 +92,18 @@ public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 
 	@Override
 	public List<Livro> livrosPorPreco(double preco) throws DAOException {
-		return livrosPorChaveValor(Livro.NOME_COL_PRECO_LIVRO, String.valueOf(preco));
+		List<Livro> lista = new ArrayList<>();
+		Livro livro = new Livro();
+		livro.setId(1L);
+		livro.setCodigo("123");
+		livro.setTitulo("Titulo 1");
+		livro.setDescricao("Descricao 1");
+		livro.setAutor("Autor 1");
+		livro.setImagem("/image1".getBytes());
+		livro.setPreco(10.5);
+		lista.add(livro);
+		
+		return lista;
 	}
 
 	private Livro criaObjetoLivroFromResultSet(ResultSet resultadoBanco) throws DAOException{

@@ -12,7 +12,7 @@ import service.exception.ServiceException;
 //@RequestScoped
 public class LivroService implements LivroServiceInterface {
 	private LivroDao livroDao;
-
+	
 	@Override
 	public List<Livro> listLivros() throws ServiceException {
 		List<Livro> livros = new ArrayList<>();
@@ -31,6 +31,14 @@ public class LivroService implements LivroServiceInterface {
 		}
 		
 		return livros;
+	}
+
+	public LivroDao getLivroDao() {
+		return livroDao;
+	}
+
+	public void setLivroDao(LivroDao livroDao) {
+		this.livroDao = livroDao;
 	}
 
 }
