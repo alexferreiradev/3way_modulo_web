@@ -4,17 +4,23 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Livros</title>
-</head>
-<body>
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Livros</title>
+</h:head>
+<h:body>
+	<ui:debug hotkey="d" />
 	<ui:composition template="/pages/templates/layout.xhtml">
 		<ui:define name="content">
-			<ui:repeat var="livro" value="#{livroService.listLivros()}">
-				<h:outputText>#{livro.titulo}</h:outputText>
-			</ui:repeat>
+			Lista de livros:<br />
+			<ul>
+				<ui:repeat var="livro" value="#{livroService.listLivros()}">
+					<li><h:outputText value="#{livro.titulo}" /></li>
+				</ui:repeat>
+			</ul>
+			<br />
+			Fim da lista
 		</ui:define>
 	</ui:composition>
-</body>
+</h:body>
 </html>
