@@ -7,9 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.NoneScoped;
-
 import data.dao.conection.FabricaConexao;
 import data.dao.exception.DAOException;
 import data.model.Livro;

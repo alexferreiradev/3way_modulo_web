@@ -3,9 +3,6 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-
 import data.dao.LivroDao;
 import data.dao.exception.DAOException;
 import data.model.Livro;
