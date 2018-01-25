@@ -5,6 +5,17 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
 	version="2.1">
 
+	<application>
+		<locale-config>
+			<default-locale>pt-br</default-locale>
+			<supported-locale>jp</supported-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>message.messages</base-name>
+			<var>msg</var>
+		</resource-bundle>
+	</application>
+
 	<managed-bean>
 		<managed-bean-name>livroService</managed-bean-name>
 		<managed-bean-class>service.LivroService</managed-bean-class>
@@ -32,5 +43,6 @@
 			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+
 
 </faces-config>

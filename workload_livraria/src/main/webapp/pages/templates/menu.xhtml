@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Insert title here</title>
@@ -13,7 +15,7 @@
 		Menu 
 		<ul>
 			<li><h:form>
-					<h:commandButton action="index" value="Index" />
+					<h:commandButton action="index" value="#{msg['menu.index']}" />
 				</h:form></li>
 			<li>Menu2</li>
 			<li>Menu3</li>
