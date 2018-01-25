@@ -14,8 +14,8 @@ import data.dao.conection.FabricaConexao;
 import data.dao.exception.DAOException;
 import data.model.Livro;
 
-@NoneScoped
-@ManagedBean
+//@NoneScoped
+//@ManagedBean
 public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 
 	private static final String OBTER_LIVRO_COD = "" + "Select * from estoque e where e.cod_livro = ?;";

@@ -11,8 +11,8 @@ import data.dao.exception.DAOException;
 import data.model.Livro;
 import service.exception.ServiceException;
 
-@ManagedBean(name="livroService")
-@RequestScoped
+//@ManagedBean(name="livroService")
+//@RequestScoped
 public class LivroService implements LivroServiceInterface {
 	private LivroDao livroDao;
 
