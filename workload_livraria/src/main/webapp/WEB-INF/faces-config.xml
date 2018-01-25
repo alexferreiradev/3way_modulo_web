@@ -9,6 +9,11 @@
 		<managed-bean-name>livroService</managed-bean-name>
 		<managed-bean-class>service.LivroService</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>livroDao</property-name>
+			<property-class>data.dao.LivroDao</property-class>
+			<value>#{livroDao}</value>
+		</managed-property>
 	</managed-bean>
 
 	<managed-bean>
