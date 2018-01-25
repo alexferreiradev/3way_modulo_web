@@ -4,12 +4,14 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta content="" />
-</head>
-<body>
-	Livraria online... Clique aqui para carregar lista de livros
-	<h:commandLink action="lista_livros">Link</h:commandLink>
-</body>
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta content="" />
+</h:head>
+<h:body>
+		Livraria online... Clique aqui para carregar lista de livros...
+		<h:form>
+			<h:commandButton action="lista_livros" value="Teste" rendered="true" />
+		</h:form>
+</h:body>
 </html>

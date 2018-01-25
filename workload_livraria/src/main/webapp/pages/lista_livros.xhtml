@@ -9,7 +9,7 @@
 <title>Livros</title>
 </head>
 <body>
-	<ui:composition template="pages/layout.xhtml">
+	<ui:composition template="/pages/templates/layout.xhtml">
 		<ui:define name="content">
 			<ui:repeat var="livro" value="#{livroService.listLivros()}">
 				<h:outputText>#{livro}</h:outputText>
