@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<ui:insert name="menu">
+			<ui:include src="menu.xhtml" />
+		</ui:insert>
+	</div>
+	<div>
+		<ui:insert name="content">
+			Conteudo da pagina padrao
+		</ui:insert>
+	</div>
+	<div>
+		<ui:insert name="rodape">
+			<ui:include src="rodape.xhtml" />
+		</ui:insert>
+	</div>
+</body>
+</html>
