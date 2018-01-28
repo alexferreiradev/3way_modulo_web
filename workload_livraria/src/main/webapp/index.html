@@ -5,6 +5,18 @@
 <title>Index</title>
 </head>
 <body>
-Hello
+	<p>Projeto Livraria - JSP</p>
+	<p>Este projeto foi criado para treinar os conhecimentos com o JEE 5</p>
+	<br> O projeto contém este servlet:
+	<ul>
+		<li><a href="livro?cmd=listar_livros">Listagem de livros</a>
+	</ul>
+	<br> 
+	O Servlet utiliza httpServlet padrao do java 5. Foi
+	implementado o método get com o uso do parametro 'cmd' para dizer qual
+	o tipo de ação que o usuário quer que o servlet execute. Portanto, ele
+	está seguindo o modelo MVC, sendo que ele é o controlador que utiliza
+	uma classe de serviço que gera um modelo e retorna para view jsp
+	mostrar.
 </body>
 </html>
