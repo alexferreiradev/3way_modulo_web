@@ -14,7 +14,8 @@ import data.model.Livro;
 public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 
 	private static final String OBTER_LIVRO_COD = "" + "Select * from estoque e where e.cod_livro = ?;";
-	private static final String OBTER_LIVROS_POR_CHAVE_VALOR = "Select * from estoque e where e.? like ?;";
+	private static final String OBTER_LIVROS_POR_CHAVE_VALOR = "Select * from estoque e where e.CHAVE like ?;";
+	private static final String OBTER_LIVROS_COM_PRECO_MAIOR_ZERO = "Select * from estoque e where e.preco > 0;";
 
 	@Override
 	public Livro create(Livro modelo) throws DAOException{
@@ -64,9 +65,9 @@ public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 		List<Livro> livros = new ArrayList<>();
 
 		try (Connection con = FabricaConexao.getConnection();) {
-			PreparedStatement ps = con.prepareStatement(OBTER_LIVROS_POR_CHAVE_VALOR);
-			ps.setString(1, chave);
-			ps.setString(2, "%" + valor + "%");
+			String obterLivrosPorChaveValor = OBTER_LIVROS_POR_CHAVE_VALOR.replaceAll("CHAVE", chave);
+			PreparedStatement ps = con.prepareStatement(obterLivrosPorChaveValor);
+			ps.setString(1, "%" + valor + "%");
 
 			ResultSet resultadoBanco = ps.executeQuery();
 			while (resultadoBanco.next()) {
@@ -90,7 +91,24 @@ public class LivroDao implements Dao<Livro>, ProjecoesLivro {
 
 	@Override
 	public List<Livro> livrosPorPreco(double preco) throws DAOException {
-		return livrosPorChaveValor(Livro.NOME_COL_PRECO_LIVRO, String.valueOf(preco));
+		List<Livro> livros = new ArrayList<>();
+
+		try (Connection con = FabricaConexao.getConnection();) {
+			PreparedStatement ps = con.prepareStatement(OBTER_LIVROS_COM_PRECO_MAIOR_ZERO);
+
+			ResultSet resultadoBanco = ps.executeQuery();
+			while (resultadoBanco.next()) {
+				livros.add(criaObjetoLivroFromResultSet(resultadoBanco));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("Erro de SQL.", e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DAOException(e);
+		}
+
+		return livros;
 	}
 
 	private Livro criaObjetoLivroFromResultSet(ResultSet resultadoBanco) throws DAOException{
