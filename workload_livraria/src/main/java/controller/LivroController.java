@@ -14,7 +14,7 @@ import service.LivroService;
 import service.exception.ServiceException;
 
 public class LivroController extends HttpServlet {
-	public static final String LISTA_LIVROS = "lista_livros";
+	public static final String LISTA_LIVROS = "listar_livros";
 	/**
 	 * 
 	 */
@@ -23,6 +23,10 @@ public class LivroController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cmdParam = req.getParameter("cmd");
+		if (cmdParam == null) {
+			cmdParam = "comando desconhecido";
+		}
+		
 		switch (cmdParam) {
 		case LISTA_LIVROS:
 			listarLivros(req, resp);
