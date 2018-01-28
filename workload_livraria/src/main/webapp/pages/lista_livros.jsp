@@ -9,9 +9,11 @@
 </head>
 <body>
 
-Livros:</br>
+<h1>Livros cadastrados</h1>
+</br>
 <c:forEach items="${livros}" var="livro">
-	Nome: <c:out value="${livro.titulo}"/> </br>
+	<b>Título: </b><c:out value="${livro.titulo}"/> 
+	<br>
 </c:forEach>
 
 </body>
