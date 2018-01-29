@@ -9,22 +9,34 @@
 	<title>Insert title here</title>
 </h:head>
 <h:body>
-	<h:form>
-		<p>Projeto Livraria - JSF</p>
-		<p>Este projeto foi criado para treinar os conhecimentos com o JEE
-			6</p>
-		<br></br>
+	<f:view locale="#{localeService.currentLocale}">
+		<h:form>
+			<p>Projeto Livraria - JSF</p>
+			<p>Este projeto foi criado para treinar os conhecimentos com o
+				JEE 6</p>
+			<br></br>
 	O projeto contém estes requisitos iniciais:
 		<ul>
-			<li><h:commandLink value="Listagem de livros" action="listar_livros" /></li>
+				<li><h:commandLink value="Listagem de livros"
+						action="listar_livros" /></li>
 
-			<li><h:commandLink action="area_restrita"
-					value="Cadastro de livros" /></li>
-		</ul>
-		<br></br> O projeto esta utilizando a tecnologia JSF 2.1 do java 6.
+				<li><h:commandLink action="area_restrita"
+						value="Cadastro de livros" /></li>
+				<li>
+					Troca de linguagem: <br></br>
+					Atual: <h:outputText value="#{localeService.currentLocale.getDisplayCountry()}"/>
+					<br />
+					<h:selectOneMenu value="#{localeService.currentLocale}">
+						<f:selectItems value="#{localeService.supportedLocales()}" var="locale" itemLabel="#{locale.getDisplayCountry()}" itemValue="#{locale}"/>
+						<h:commandButton action="#{localeService.changeCurrentLocale(locale)}" value="Trocar linguagem"/>
+					</h:selectOneMenu>
+				</li>
+			</ul>
+			<br></br> O projeto esta utilizando a tecnologia JSF 2.1 do java 6.
 			Utiliza internacionalizacao e componentes visuais do primefaces. Faz
 			controle de acesso com o Spring-security, acesso a dados com JPA +
 			Hibernate e possue log implementado com o Logback.
 	</h:form>
+	</f:view>
 </h:body>
 </html>
