@@ -10,12 +10,13 @@
 <title>Livros</title>
 </head>
 <body>
-<ui:include src="pages/templates/menu.xhtml" />
+<ui:include src="/pages/templates/menu.xhtml" />
 
+<h1>Livros Cadastrados</h1>
 <ui:repeat var="livro" value="#{livroService.listaLivros()}">
-	<h:outputText>#{livro}</h:outputText>
+	Titulo do livro: <h:outputText>#{livro.titulo}</h:outputText>
 </ui:repeat>
 
-<ui:include src="pages/templates/rodape.xhtml" />
+<ui:include src="/pages/templates/rodape.xhtml" />
 </body>
 </html>
