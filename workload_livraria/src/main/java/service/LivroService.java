@@ -9,14 +9,15 @@ import data.model.Livro;
 import service.exception.ServiceException;
 
 public class LivroService implements LivroServiceInterface {
+	private LivroDao livroDao;
 
 	@Override
-	public List<Livro> listLivros() throws ServiceException {
+	public List<Livro> listaLivros() throws ServiceException {
 		List<Livro> livros = new ArrayList<>();
 		
 		try {
-			LivroDao livroDao = new LivroDao();
-			List<Livro> livrosPorPreco = livroDao.livrosPorPreco(0);
+			setLivroDao(new LivroDao());
+			List<Livro> livrosPorPreco = getLivroDao().livrosPorPreco(0);
 			if (livrosPorPreco != null) {
 				livros = livrosPorPreco;
 			}
@@ -29,6 +30,14 @@ public class LivroService implements LivroServiceInterface {
 		}
 		
 		return livros;
+	}
+
+	public LivroDao getLivroDao() {
+		return livroDao;
+	}
+
+	public void setLivroDao(LivroDao livroDao) {
+		this.livroDao = livroDao;
 	}
 
 }
