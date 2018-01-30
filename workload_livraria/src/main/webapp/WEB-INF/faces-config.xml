@@ -13,6 +13,13 @@
 			<supported-locale>it_IT</supported-locale>
 		</locale-config>
 	</application>
+	
+	<converter>
+		<description></description>
+		<display-name>LocaleConverter</display-name>
+		<converter-id>LocaleConverter</converter-id>
+		<converter-class>ui.converter.LocaleConverter</converter-class>
+	</converter>
 
 	<managed-bean>
 		<managed-bean-name>livroService</managed-bean-name>

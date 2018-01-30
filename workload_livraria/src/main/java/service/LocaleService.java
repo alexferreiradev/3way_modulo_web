@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
@@ -14,19 +15,14 @@ public class LocaleService {
 	public LocaleService() {
 		this.currentLocale = FacesContext.getCurrentInstance().getApplication().getDefaultLocale();
 	}
-
-	public void changeCurrentLocale(Locale newLocale) {
-		Iterator<Locale> supportedLocales = FacesContext.getCurrentInstance().getApplication().getSupportedLocales();
-		Locale newSupportedLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();;
-		while (supportedLocales.hasNext()) {
-			newSupportedLocale = supportedLocales.next();
-			if (newLocale.equals(newSupportedLocale)) {
-				System.out.println("Trocando linguagem para: " + newLocale);
-			}
-		}
+	
+	public String changeLocale() {
+		Map<String, String> parameterMap = (Map<String, String>) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		   String newLanguage = parameterMap.get("newLanguage");
+		currentLocale = new Locale(newLanguage);
+		FacesContext.getCurrentInstance().getViewRoot().setLocale(currentLocale);
 		
-		currentLocale = newSupportedLocale;
-		FacesContext.getCurrentInstance().getViewRoot().setLocale(newSupportedLocale);
+		return FacesContext.getCurrentInstance().getViewRoot().getViewId();
 	}
 	
 	public List<Locale> supportedLocales(){
@@ -44,8 +40,8 @@ public class LocaleService {
 		return currentLocale;
 	}
 
-	public void setCurrentLocale(Locale currentLocale) {
-		this.currentLocale = currentLocale;
+	public void setCurrentLocale(Locale locale) {
+		this.currentLocale = locale;
 	}
 
 }
