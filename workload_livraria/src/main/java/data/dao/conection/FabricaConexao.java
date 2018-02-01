@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class FabricaConexao {
 	
-	private static final String NOME_BANCO = "livraria";
+	private static final String NOME_BANCO = "livraria_ter-qui";
 
 	public static Connection getConnection() {
 		try {
