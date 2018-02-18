@@ -6,7 +6,6 @@
    http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
    version="2.1">
 
-
 	<managed-bean>
 		<managed-bean-name>livroService</managed-bean-name>
 		<managed-bean-class>service.LivroService</managed-bean-class>
