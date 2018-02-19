@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="page/template/padrao.xhtml">
 	<ui:define name="title-head">Inicio</ui:define>
 	<ui:define name="content">
 		<h:form>
-			<p>Projeto Livraria - JSF</p>
+			<h2>Projeto Livraria - JSF</h2>
 			<p>Este projeto foi criado para treinar os conhecimentos com o JEE 7</p>
 			<br></br>
 		O projeto contém estes requisitos iniciais:
 			<ul>
-				<li><h:commandLink value="Listagem de livros" action="listar_livros" /></li>
-
-				<li><h:commandLink action="area_restrita" value="Cadastro de livros" /></li>
+				<li><p:commandLink action="listar_livros" value="Listagem de livros" /></li>
+				<li><p:commandLink action="area_restrita" value="Cadastro de livros" /></li>
 			</ul>
 			<br></br>
 			<p>O projeto esta utilizando a tecnologia JSF 2.1 do java 7. Utiliza internacionalizacao e

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta charset="UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/workload_livraria/css/estilo_padrao.css" />
 	<title><ui:insert name="title-head" /></title>
 </h:head>
 <h:body>
 	<ui:debug hotkey="y" rendered="true" />
 	<div>
-		<ui:include src="menu.xhtml" />
+		<ui:insert name="header">
+			<ui:include src="menu.xhtml" />
+		</ui:insert>
 	</div>
 	<div>
 		<ui:insert name="content">

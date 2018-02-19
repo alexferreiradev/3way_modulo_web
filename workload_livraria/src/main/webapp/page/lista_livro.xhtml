@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
-<ui:composition template="template/padrao.xhtml">
+<ui:composition template="template/padrao.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="title-head">Livros</ui:define>
-	
 	<ui:define name="content">
-		<h1>Lista de livros:</h1>
-		<br />
-		<ul>
-			<ui:repeat var="livro" value="#{livroService.listeLivros()}">
-				<li><h:outputText value="#{livro.titulo}" /></li>
-			</ui:repeat>
-		</ul>
-		<br />
+		<p:dataList value="#{livroService.listeLivros()}" var="livro" type="unordered" itemType="none"
+			paginator="true" rows="5" styleClass="paginated">
+			<f:facet name="header">
+				<h1>LIVROS</h1>
+			</f:facet>
+			<h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+				<p:graphicImage url="/imagem/livro_padrao.png" height="60px" width="60px" />
+
+				<p:outputPanel>
+					<h:panelGrid columns="2" cellpadding="2">
+						<h:outputText value="Título:" />
+						<h:outputText value="#{livro.titulo}" style="font-weight: bold" />
+
+						<h:outputText value="Autor:" />
+						<h:outputText value="#{livro.autor}" style="font-weight: bold" />
+
+						<h:outputText value="Preço:" />
+						<h:outputText value="#{livro.preco}" style="font-weight: bold" />
+					</h:panelGrid>
+				</p:outputPanel>
+			</h:panelGrid>
+			<hr />
+		</p:dataList>
 	</ui:define>
 </ui:composition>
-</html>
