@@ -2,13 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
 <h:head>
-	<title>
-		<ui:insert name="titulo">
+	<link type="text/css" rel="stylesheet" href="/workload_livraria/css/estilo_padrao.css" />
+	<title><ui:insert name="titulo">
 			Livraria
-		</ui:insert>
-	</title>
+		</ui:insert></title>
 </h:head>
 <h:body>
 	<ui:include src="menu.xhtml" />
@@ -17,6 +18,10 @@
 		Conteudo Padrao
 	</ui:insert>
 
-	<ui:include src="rodape.xhtml" />
+	<p:toolbar>
+		<f:facet name="left">
+			<ui:include src="rodape.xhtml" />
+		</f:facet>
+	</p:toolbar>
 </h:body>
 </html>
