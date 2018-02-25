@@ -9,7 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GeneratorType;
 
 @Entity
 @Table(name = "livro")
@@ -26,18 +29,18 @@ public class Livro extends BaseModel {
 	private static final long serialVersionUID = -2559517779086869262L;
 
 	@Id()
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column()
+	@Column
 	private String titulo;
-	@Column()
+	@Column
 	private String autor;
-	@Column()
+	@Column
 	private String imagem;
-	@Column()
+	@Column
 	private String descricao;
-	@Column()
+	@Column
 	private double preco;
 
 	public Livro() {

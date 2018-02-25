@@ -30,9 +30,13 @@ public class LivroDao implements Dao {
 			query.setMaxResults(limit);
 			query.setFirstResult(offset);
 			livros = query.getResultList(); // todo verificar se retorna null
-		} catch (Exception e) {
+		} catch (Exception e) {			
 			L.error("Erro ao tentar buscar livros: " + e.getMessage());
 			throw new DAOException("Erro desconhecido ao buscar livros no banco: " + e.getMessage());
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
 		}
 		
 		return livros;
