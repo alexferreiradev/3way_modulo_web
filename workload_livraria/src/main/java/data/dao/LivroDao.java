@@ -1,40 +1,38 @@
 package data.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.dao.conection.FabricaConexao;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import data.dao.exception.DAOException;
 import data.model.Livro;
 
 public class LivroDao implements Dao {
+	private final static Logger L = LoggerFactory.getLogger(LivroDao.class);
+	
+	private EntityManagerFactory factory = Persistence.createEntityManagerFactory("livraria");
+	private EntityManager em;
 
 	@Override
-	public List<Livro> listeLivro() {
+	public List<Livro> listeLivro(int offset, int limit) throws DAOException {
 		List<Livro> livros = new ArrayList<>();
 		
-		Connection connection = FabricaConexao.getConnection();
 		try {
-			PreparedStatement prepareStatement = connection.prepareStatement("select * from estoque");
-			ResultSet resultSet = prepareStatement.executeQuery();
-			
-			while(resultSet.next()) {
-				Livro livro = new Livro();
-				livro.setId(resultSet.getLong("id"));
-				livro.setCodLivro(resultSet.getString("COD_LIVRO"));
-				livro.setTitulo(resultSet.getString("TITULO"));
-				livro.setAutor(resultSet.getString("AUTOR"));
-				livro.setDescricao(resultSet.getString("DESCRICAO"));
-				livro.setImagem(resultSet.getString("IMAGEM"));
-				livro.setPreco(resultSet.getDouble("PRECO"));
-				
-				livros.add(livro);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			em = factory.createEntityManager();
+			TypedQuery<Livro> query = em.createQuery("from Livro l", Livro.class);
+			query.setMaxResults(limit);
+			query.setFirstResult(offset);
+			livros = query.getResultList(); // todo verificar se retorna null
+		} catch (Exception e) {
+			L.error("Erro ao tentar buscar livros: " + e.getMessage());
+			throw new DAOException("Erro desconhecido ao buscar livros no banco: " + e.getMessage());
 		}
 		
 		return livros;
