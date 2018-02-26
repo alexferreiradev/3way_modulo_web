@@ -5,6 +5,7 @@
 		
 		<class>data.model.BaseModel</class>
 		<class>data.model.Livro</class>
+		<class>data.model.ItemEstoque</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
@@ -17,7 +18,11 @@
             <property name="hibernate.show_sql" value="false" />
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="create-drop" />
-            <property name="hibernate.hbm2ddl.import_files" value="/insere_livros_teste.sql" />
+            <property name="hibernate.hbm2ddl.import_files" value="/insere_dados_iniciais.sql" />
+            
+            <property name="c3p0.initialPoolSize" value="10"/>
+    		<property name="c3p0.maxPoolSize" value="1000"/>
+    		<property name="c3p0.timeout" value="300"/>
             
 		</properties>
 		

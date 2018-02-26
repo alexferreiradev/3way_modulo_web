@@ -14,6 +14,12 @@ INSERT INTO livro (TITULO,AUTOR,PRECO,IMAGEM) VALUES ('PARA ONDE ELA FOI?', 'FOR
 INSERT INTO livro (TITULO,AUTOR,PRECO,IMAGEM) VALUES ('O LIVRO DO CEMITERIO', 'GAILMAN, NEIL', 20.0, 'imagens/cemiterio.jpg');
 INSERT INTO livro (TITULO,AUTOR,PRECO,IMAGEM) VALUES ('SANDMAN VOL 1', 'GAILMAN, NEIL', 489.0, 'imagens/sandman.jpg');
 INSERT INTO livro (TITULO,AUTOR,PRECO,IMAGEM) VALUES ('WATCHMEN', 'MOORE, ALAN', 37.4, 'imagens/watchmen.jpg');
-INSERT INTO ESTOQUE (TITULO,AUTOR,PRECO,IMAGEM) VALUES ('JUSTICEIRO NOIR', 'TIIER, FRANK', 12.5, 'imagens/justiceiro.jpg');
-INSERT INTO ESTOQUE (TITULO,AUTOR,PRECO,IMAGEM) VALUES ('SUPERMAN', 'TOMASI, PETER', 5.9, 'imagens/superman.jpg');
-INSERT INTO ESTOQUE (TITULO,AUTOR,PRECO,IMAGEM) VALUES ('BATMAN', 'SNYDER, SCOTT', 5.9, 'imagens/batman.jpeg');
+INSERT INTO livro (TITULO,AUTOR,PRECO,IMAGEM) VALUES ('JUSTICEIRO NOIR', 'TIIER, FRANK', 12.5, 'imagens/justiceiro.jpg');
+INSERT INTO livro (TITULO,AUTOR,PRECO,IMAGEM) VALUES ('SUPERMAN', 'TOMASI, PETER', 5.9, 'imagens/superman.jpg');
+INSERT INTO livro (TITULO,AUTOR,PRECO,IMAGEM) VALUES ('BATMAN', 'SNYDER, SCOTT', 5.9, 'imagens/batman.jpeg');
+
+insert into estoque (livro_id, quantidade, data_criacao, data_atualizacao) values (1, 4, current_timestamp, current_timestamp);
+insert into estoque (livro_id, quantidade, data_criacao, data_atualizacao) values (2, 4, current_timestamp, current_timestamp);
+insert into estoque (livro_id, quantidade, data_criacao, data_atualizacao) values (3, 4, current_timestamp, current_timestamp);
+insert into estoque (livro_id, quantidade, data_criacao, data_atualizacao) values (4, 4, current_timestamp, current_timestamp);
+insert into estoque (livro_id, quantidade, data_criacao, data_atualizacao) values (5, 4, current_timestamp, current_timestamp);
