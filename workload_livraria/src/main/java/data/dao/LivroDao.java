@@ -21,7 +21,7 @@ public class LivroDao extends BaseDao implements Dao {
 			return query.getResultList();
 		} catch (Exception e) {			
 			L.error("Erro ao tentar buscar livros: " + e.getMessage());
-			throw new DAOException("Erro desconhecido ao buscar livros no banco: " + e.getMessage());
+			throw new DAOException("Erro desconhecido ao buscar livros no banco: " + e.getMessage(), e);
 		} finally {
 			closeEntityManager();
 		}

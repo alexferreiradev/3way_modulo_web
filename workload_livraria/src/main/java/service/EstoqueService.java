@@ -24,19 +24,19 @@ public class EstoqueService {
 	
 	public List<ItemEstoqueDto> listeItems() throws ServiceException{
 		try {
-//			List<ItemEstoque> items = dao.listeItems(0, 20);
+			List<ItemEstoque> items = dao.listeItems(0, 20);
 			
-//			return createDtoFromItems(items);
-			return new ArrayList<>();
+			return createDtoFromItems(items);
+//			return new ArrayList<>();
 		} catch (IllegalArgumentException e) {
 			L.error("Erro ao tentar converter model em dto: " + e.getMessage());
-			throw new ServiceException("Erro ao converter dados do banco. Contate ao ADM.");
-//		} catch (DAOException e) {
-//			L.error("Erro no serviço de estoque ao acessar o banco: " + e.getMessage());
-//			throw new ServiceException("Erro no banco de dados. Contate ao ADM.");
+			throw new ServiceException("Erro ao converter dados do banco. Contate ao ADM.", e);
+		} catch (DAOException e) {
+			L.error("Erro no serviço de estoque ao acessar o banco: " + e.getMessage());
+			throw new ServiceException("Erro no banco de dados. Contate ao ADM.", e);
 		} catch (Exception e) {
 			L.error("Erro no serviço de estoque desconhecido: " + e.getMessage());
-			throw new ServiceException("Erro interno no sistema. Contate ao ADM.");
+			throw new ServiceException("Erro interno no sistema. Contate ao ADM.", e);
 		}
 	}
 	

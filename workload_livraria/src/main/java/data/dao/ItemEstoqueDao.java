@@ -23,7 +23,7 @@ public class ItemEstoqueDao extends BaseDao{
 			return query.getResultList();
 		} catch (Exception e) {
 			L.error("Erro ao listar items de estoque: " + e.getMessage());
-			throw new DAOException("Erro desconhecido ao listar items de estoque");
+			throw new DAOException("Erro desconhecido ao listar items de estoque", e);
 		} finally {
 			closeEntityManager();
 		}
