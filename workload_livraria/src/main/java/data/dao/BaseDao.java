@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 public abstract class BaseDao {
 	protected final static Logger L = LoggerFactory.getLogger(BaseDao.class);
 	
-	protected EntityManagerFactory factory = Persistence.createEntityManagerFactory("livraria");
+	protected final static EntityManagerFactory factory = Persistence.createEntityManagerFactory("livraria");
 	protected EntityManager em;
 
 	public BaseDao() {

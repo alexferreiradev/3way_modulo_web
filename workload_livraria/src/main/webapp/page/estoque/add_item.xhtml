@@ -7,9 +7,6 @@
 	<ui:define name="content">
 		<p:commandButton action="add_estoque_item" value="Adicionar item"/>
 		<h:form>
-			<p:selectOneListbox value="#{livroService.listeLivros()}" var="livro" >
-				<f:selectItem value="#{livro.id}" itemLabel="#{livro.titulo}"/>
-			</p:selectOneListbox>
 			
 			<p:commandButton action="#{estoqueService.addItem()}" value="Adicionar" />
 		</h:form>
