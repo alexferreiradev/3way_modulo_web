@@ -4,6 +4,9 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,13 +14,12 @@ import data.dao.ItemEstoqueDao;
 import data.dao.exception.DAOException;
 import data.dto.ItemEstoqueDto;
 import data.model.ItemEstoque;
-import data.model.Livro;
 import service.exception.ServiceException;
 
 public class EstoqueService {
 	private final static Logger L = LoggerFactory.getLogger(EstoqueService.class);
 	private ItemEstoqueDao dao;
-	private Livro selectedLivro;
+	private FacesContext fc = FacesContext.getCurrentInstance();
 	
 	public EstoqueService() {
 	}
@@ -27,7 +29,6 @@ public class EstoqueService {
 			List<ItemEstoque> items = dao.listeItems(0, 20);
 			
 			return createDtoFromItems(items);
-//			return new ArrayList<>();
 		} catch (IllegalArgumentException e) {
 			L.error("Erro ao tentar converter model em dto: " + e.getMessage());
 			throw new ServiceException("Erro ao converter dados do banco. Contate ao ADM.", e);
@@ -40,21 +41,40 @@ public class EstoqueService {
 		}
 	}
 	
-	public String addItem() {
-//		FacesContext.getCurrentInstance().addMessage("Livro adicionado no estoque", null);
-		L.info("Livro: " + selectedLivro + " adicionado no estoque");
-		return "estoque";
+	public ItemEstoque addItem(ItemEstoque item) throws ServiceException {
+		try {
+			item = dao.addItem(item);
+			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item adicionado", "com sucesso"));
+		} catch (Exception e) {
+			L.error("Erro ao tentar adicionar item de estoque: " + e.getMessage());
+			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro interno", "Contate o adm do sistema"));
+		}
+		
+		return item;
+	}
+
+	public void removeItem(ItemEstoque item) {
+		try {
+			item = dao.removeItem(item);
+			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item removido", "com sucesso"));
+		} catch (Exception e) {
+			L.error("Erro ao tentar remover item de estoque: " + e.getMessage());
+			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro interno", "Contate o adm do sistema"));
+		}		
 	}
 
 	private List<ItemEstoqueDto> createDtoFromItems(List<ItemEstoque> items) throws IllegalArgumentException {
 		List<ItemEstoqueDto> dtos = new ArrayList<>();
 		for (ItemEstoque itemEstoque : items) {
 			ItemEstoqueDto dto = new ItemEstoqueDto();
+			dto.setId(String.valueOf(itemEstoque.getId()));
 			dto.setLivro(itemEstoque.getLivro());
 			dto.setDisponivel(itemEstoque.getQuantidade() > 0);
 			DateFormat dateTimeInstance = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 			String dataAtualizacao = dateTimeInstance.format(itemEstoque.getDataAtualizacao());
 			dto.setDataAtualizacao(dataAtualizacao);
+			String dataCriacao = dateTimeInstance.format(itemEstoque.getDataCriacao());
+			dto.setDataCriacao(dataCriacao);
 			dtos.add(dto);
 		}
 		
@@ -68,13 +88,4 @@ public class EstoqueService {
 	public void setDao(ItemEstoqueDao dao) {
 		this.dao = dao;
 	}
-
-	public Livro getSelectedLivro() {
-		return selectedLivro;
-	}
-
-	public void setSelectedLivro(Livro selectedLivro) {
-		this.selectedLivro = selectedLivro;
-	}
-
 }

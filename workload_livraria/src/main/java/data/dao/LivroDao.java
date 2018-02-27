@@ -26,5 +26,18 @@ public class LivroDao extends BaseDao implements Dao {
 			closeEntityManager();
 		}
 	}
+	
+	public Livro encontreLivro(Long id) throws DAOException {
+		try {
+			openEntityManager();
+			
+			return em.find(Livro.class, id);
+		} catch (Exception e) {			
+			L.error("Erro ao tentar buscar livros: " + e.getMessage());
+			throw new DAOException("Erro desconhecido ao buscar livros no banco: " + e.getMessage(), e);
+		} finally {
+			closeEntityManager();
+		}
+	}
 
 }

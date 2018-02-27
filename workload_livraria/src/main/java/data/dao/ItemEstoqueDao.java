@@ -28,5 +28,48 @@ public class ItemEstoqueDao extends BaseDao{
 			closeEntityManager();
 		}
 	}
+	
+	public ItemEstoque addItem(ItemEstoque item) throws DAOException {
+		try {
+			openEntityManager();
+			em.getTransaction().begin();
+			item = em.merge(item);
+			em.getTransaction().commit();
+			
+			return item;
+		} catch (Exception e) {
+			if (em.getTransaction() != null && em.getTransaction().isActive()) {
+				L.debug("Realizando rollback de adicao de item de estoque.");
+				em.getTransaction().rollback();
+			}
+			
+			L.error("Erro ao salvar item de estoque: " + e.getMessage());
+			throw new DAOException("Erro desconhecido ao salvar item de estoque", e);
+		} finally {
+			closeEntityManager();
+		}
+	}
+
+	public ItemEstoque removeItem(ItemEstoque item) throws DAOException {
+		try {
+			openEntityManager();
+			
+			em.getTransaction().begin();
+			em.remove(item);
+			em.getTransaction().commit();
+			
+			return item;
+		} catch (Exception e) {
+			if (em.getTransaction() != null && em.getTransaction().isActive()) {
+				L.debug("Realizando rollback de remocao de item de estoque.");
+				em.getTransaction().rollback();
+			}
+			
+			L.error("Erro ao remover item de estoque: " + e.getMessage());
+			throw new DAOException("Erro desconhecido ao remover item de estoque", e);
+		} finally {
+			closeEntityManager();
+		}
+	}
 
 }

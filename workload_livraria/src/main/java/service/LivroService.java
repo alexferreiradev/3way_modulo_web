@@ -23,6 +23,15 @@ public class LivroService {
 			throw new ServiceException("Erro no banco de dados, contate o ADM do sistema");
 		}
 	}
+	
+	public Livro encontreLivro(Long id) throws ServiceException {
+		try {
+			return livroDao.encontreLivro(id);
+		} catch (DAOException e) {
+			L.error("Erro no banco ao buscar livro com id: " + id + ". Exception: " + e.getMessage());
+			throw new ServiceException("Erro no banco de dados, contate o ADM do sistema");
+		}
+	}
 
 	public LivroDao getLivroDao() {
 		return livroDao;

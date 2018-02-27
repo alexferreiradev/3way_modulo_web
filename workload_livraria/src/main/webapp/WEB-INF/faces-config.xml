@@ -3,7 +3,22 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
 	version="2.1">
-
+	
+	<!-- #######################################   DAOs -->
+	
+	<managed-bean>
+		<managed-bean-name>livroDao</managed-bean-name>
+		<managed-bean-class>data.dao.LivroDao</managed-bean-class>
+		<managed-bean-scope>none</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>itemEstoqueDao</managed-bean-name>
+		<managed-bean-class>data.dao.ItemEstoqueDao</managed-bean-class>
+		<managed-bean-scope>none</managed-bean-scope>
+	</managed-bean>
+	
+	<!-- #######################################   Services -->
+	
 	<managed-bean>
 		<managed-bean-name>livroService</managed-bean-name>
 		<managed-bean-class>service.LivroService</managed-bean-class>
@@ -24,17 +39,39 @@
 			<value>#{itemEstoqueDao}</value>
 		</managed-property>
 	</managed-bean>
+	
+	<!-- #######################################   Views -->
+	
 	<managed-bean>
-		<managed-bean-name>livroDao</managed-bean-name>
-		<managed-bean-class>data.dao.LivroDao</managed-bean-class>
-		<managed-bean-scope>none</managed-bean-scope>
+		<managed-bean-name>estoqueListView</managed-bean-name>
+		<managed-bean-class>ui.view.EstoqueListView</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>estoqueService</property-name>
+			<property-class>service.EstoqueService</property-class>
+			<value>#{estoqueService}</value>
+		</managed-property>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>itemEstoqueDao</managed-bean-name>
-		<managed-bean-class>data.dao.ItemEstoqueDao</managed-bean-class>
-		<managed-bean-scope>none</managed-bean-scope>
+		<managed-bean-name>addLivroView</managed-bean-name>
+		<managed-bean-class>ui.view.AddLivroEstoqueView</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>estoqueService</property-name>
+			<property-class>service.EstoqueService</property-class>
+			<value>#{estoqueService}</value>
+		</managed-property>
 	</managed-bean>
+	
+	<!-- #######################################   Converters -->
+	
+	<converter>
+		<converter-id>livroConverter</converter-id>
+		<converter-class>ui.converter.LivroConverter</converter-class>
+	</converter>
 
+	<!-- #######################################   Navegacoes -->
+	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
@@ -52,6 +89,12 @@
 			<to-view-id>/page/estoque.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+			<from-action>#{estoqueListView.removeItem}</from-action>
+			<from-outcome>estoque</from-outcome>
+			<to-view-id>/page/estoque.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
@@ -59,6 +102,7 @@
 		<navigation-case>
 			<from-outcome>add_item</from-outcome>
 			<to-view-id>/page/estoque/add_item.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 

@@ -1,36 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<ui:composition template="template/padrao.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/page/template/padrao.xhtml" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="title-head">Livros</ui:define>
 	<ui:define name="content">
 		<h:form>
-			<p:commandButton action="add_item" value="Adicionar item"/>
+			<p:commandButton action="add_item" value="Adicionar item" />
+
+			<p:dataList value="#{estoqueService.listeItems()}" var="item" type="unordered" itemType="none"
+				paginator="true" rows="5" styleClass="paginated">
+				<f:facet name="header">
+					<h1>Estoque</h1>
+				</f:facet>
+				<h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+					<p:graphicImage url="/imagem/livro_padrao.png" height="60px" width="60px" />
+
+					<p:outputPanel>
+						<h:panelGrid columns="2" cellpadding="2">
+							<h:outputText value="Título:" />
+							<h:outputText value="#{item.livro.titulo}" style="font-weight: bold" />
+
+							<h:outputText value="Autor:" />
+							<h:outputText value="#{item.livro.autor}" style="font-weight: bold" />
+
+							<h:outputText value="Disponivel:" />
+							<h:outputText value="#{item.disponivel}" style="font-weight: bold" />
+
+							<p:commandButton action="editar" value="Editar" disabled="true" />
+							<p:commandButton update=":removeConfirmInfo" oncomplete="PF('removeConfirm').show()"
+								value="X">
+								<f:setPropertyActionListener value="#{item}" target="#{estoqueListView.selectedItem}" />
+							</p:commandButton>
+						</h:panelGrid>
+					</p:outputPanel>
+				</h:panelGrid>
+				<hr />
+			</p:dataList>
 		</h:form>
-		
-		<p:dataList value="#{estoqueService.listeItems()}" var="item" type="unordered" itemType="none"
-			paginator="true" rows="5" styleClass="paginated">
-			<f:facet name="header">
-				<h1>Estoque</h1>
-			</f:facet>
-			<h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-				<p:graphicImage url="/imagem/livro_padrao.png" height="60px" width="60px" />
-
-				<p:outputPanel>
-					<h:panelGrid columns="2" cellpadding="2">
-						<h:outputText value="Título:" />
-						<h:outputText value="#{item.livro.titulo}" style="font-weight: bold" />
-
-						<h:outputText value="Autor:" />
-						<h:outputText value="#{item.livro.autor}" style="font-weight: bold" />
-
-						<h:outputText value="Disponivel:" />
-						<h:outputText value="#{item.disponivel}" style="font-weight: bold" />
-					</h:panelGrid>
-				</p:outputPanel>
-			</h:panelGrid>
-			<hr />
-		</p:dataList>
+		<p:dialog header="Remoção de item" widgetVar="removeConfirm" modal="true" showEffect="blind"
+			hideEffect="explode" resizable="false">
+			<p:outputPanel id="removeConfirmInfo" style="text-align:center;">
+				<h:form>
+					<p:graphicImage name="/imagem/remover.png" alt="img_remover" />
+					<h:outputText
+						value="Deseja remover o livro do estoque: #{estoqueListView.selectedItem.livro.titulo}?" />
+					<p:commandButton action="#{estoqueListView.removeItem()}" value="Remover" />
+				</h:form>
+			</p:outputPanel>
+		</p:dialog>
 	</ui:define>
 </ui:composition>
