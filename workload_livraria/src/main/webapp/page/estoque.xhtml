@@ -6,12 +6,18 @@
 	<ui:define name="title-head">Livros</ui:define>
 	<ui:define name="content">
 		<h:form>
-			<p:commandButton action="add_item" value="Adicionar item" />
-
+			<p:toolbar>
+				<f:facet name="left">
+					<h1>Estoque</h1>
+				</f:facet>
+				<f:facet name="right">
+					<p:commandButton action="add_item" value="Adicionar produto" />
+				</f:facet>
+			</p:toolbar>
 			<p:dataList value="#{estoqueService.listeItems()}" var="item" type="unordered" itemType="none"
 				paginator="true" rows="5" styleClass="paginated">
 				<f:facet name="header">
-					<h1>Estoque</h1>
+					<h1>Produtos</h1>
 				</f:facet>
 				<h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
 					<p:graphicImage url="/imagem/livro_padrao.png" height="60px" width="60px" />
@@ -30,24 +36,24 @@
 							<p:commandButton action="editar" value="Editar" disabled="true" />
 							<p:commandButton update=":removeConfirmInfo" oncomplete="PF('removeConfirm').show()"
 								value="X">
-								<f:setPropertyActionListener value="#{item}" target="#{estoqueListView.selectedItem}" />
+								<f:setPropertyActionListener value="#{item}" target="${estoqueListView.selectedItem}" />
 							</p:commandButton>
 						</h:panelGrid>
 					</p:outputPanel>
 				</h:panelGrid>
 				<hr />
 			</p:dataList>
+			<p:dialog header="Remoção de item" widgetVar="removeConfirm" modal="true" showEffect="blind"
+				hideEffect="explode" resizable="false">
+				<p:outputPanel id="removeConfirmInfo" style="text-align:center;">
+					<h:form>
+						<p:graphicImage name="/imagem/remover.png" alt="img_remover" />
+						<h:outputText
+							value="Deseja remover o livro do estoque: #{estoqueListView.selectedItem.livro.titulo}?" />
+						<p:commandButton action="#{estoqueListView.removeItem()}" value="Remover" />
+					</h:form>
+				</p:outputPanel>
+			</p:dialog>
 		</h:form>
-		<p:dialog header="Remoção de item" widgetVar="removeConfirm" modal="true" showEffect="blind"
-			hideEffect="explode" resizable="false">
-			<p:outputPanel id="removeConfirmInfo" style="text-align:center;">
-				<h:form>
-					<p:graphicImage name="/imagem/remover.png" alt="img_remover" />
-					<h:outputText
-						value="Deseja remover o livro do estoque: #{estoqueListView.selectedItem.livro.titulo}?" />
-					<p:commandButton action="#{estoqueListView.removeItem()}" value="Remover" />
-				</h:form>
-			</p:outputPanel>
-		</p:dialog>
 	</ui:define>
 </ui:composition>

@@ -63,6 +63,17 @@
 		</managed-property>
 	</managed-bean>
 	
+	<managed-bean>
+		<managed-bean-name>lojaView</managed-bean-name>
+		<managed-bean-class>ui.view.LojaView</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>estoqueService</property-name>
+			<property-class>service.EstoqueService</property-class>
+			<value>#{estoqueService}</value>
+		</managed-property>
+	</managed-bean>
+	
 	<!-- #######################################   Converters -->
 	
 	<converter>
@@ -80,13 +91,18 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>listar_livros</from-outcome>
-			<to-view-id>/page/lista_livro.xhtml</to-view-id>
+			<from-outcome>loja</from-outcome>
+			<to-view-id>/page/loja.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>estoque</from-outcome>
 			<to-view-id>/page/estoque.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>lista_livros</from-outcome>
+			<to-view-id>/page/lista_livro.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>

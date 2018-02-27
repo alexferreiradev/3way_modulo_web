@@ -1,5 +1,10 @@
 package data.dto;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
+
+import data.model.ItemEstoque;
 import data.model.Livro;
 
 public class ItemEstoqueDto {
@@ -15,6 +20,22 @@ public class ItemEstoqueDto {
 		this.quantidade = "";
 		this.dataAtualizacao = "";
 		this.dataCriacao = "";
+	}
+	
+	public ItemEstoque createItemFromDto() throws ParseException {
+		ItemEstoque itemEstoque = new ItemEstoque();
+		
+		itemEstoque.setId(Long.valueOf(id));
+		itemEstoque.setLivro(livro);
+		Integer qtd = quantidade.isEmpty() ? new Integer(1) : Integer.valueOf(quantidade);
+		itemEstoque.setQuantidade(qtd);
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+		Date dataAtualizacao = this.dataAtualizacao.isEmpty() ? null : dateFormat.parse(this.dataAtualizacao);
+		itemEstoque.setDataAtualizacao(dataAtualizacao);
+		Date dataCriacao = this.dataCriacao.isEmpty() ? null : dateFormat.parse(this.dataCriacao);
+		itemEstoque.setDataCriacao(dataCriacao);
+		
+		return itemEstoque;
 	}
 
 	public Livro getLivro() {

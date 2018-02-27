@@ -9,25 +9,23 @@ import org.slf4j.LoggerFactory;
 import data.dto.ItemEstoqueDto;
 import service.EstoqueService;
 
-public class EstoqueListView {
-	private final static Logger L = LoggerFactory.getLogger(EstoqueListView.class);
+public class LojaView {
+	private final static Logger L = LoggerFactory.getLogger(LojaView.class);
 	
 	private FacesContext fc = FacesContext.getCurrentInstance();
 	private EstoqueService estoqueService;
 	private ItemEstoqueDto selectedItem;
-
-	public EstoqueListView() {
-		// todo Auto-generated constructor stub
-	}
 	
-	public void removeItem() {
-		try {			
+	public String buy() {
+		try {
 			estoqueService.removeItem(selectedItem.createItemFromDto());
 			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "item removido do estoque: ", String.valueOf(selectedItem.getId())));
 		} catch (Exception e) {
 			L.error("Erro no sistema: " + e.getMessage());
 			fc.addMessage("messages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao tentar remover item do estoque.", ""));
 		}
+		
+		return "loja";
 	}
 
 	public EstoqueService getEstoqueService() {

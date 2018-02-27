@@ -55,6 +55,7 @@ public class ItemEstoqueDao extends BaseDao{
 			openEntityManager();
 			
 			em.getTransaction().begin();
+			item = em.find(ItemEstoque.class, item.getId());
 			em.remove(item);
 			em.getTransaction().commit();
 			
