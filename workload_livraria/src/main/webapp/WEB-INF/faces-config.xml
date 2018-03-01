@@ -9,12 +9,12 @@
 	<managed-bean>
 		<managed-bean-name>livroDao</managed-bean-name>
 		<managed-bean-class>data.dao.LivroDao</managed-bean-class>
-		<managed-bean-scope>none</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>itemEstoqueDao</managed-bean-name>
 		<managed-bean-class>data.dao.ItemEstoqueDao</managed-bean-class>
-		<managed-bean-scope>none</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	
 	<!-- #######################################   Services -->
@@ -98,7 +98,6 @@
 		<navigation-case>
 			<from-outcome>estoque</from-outcome>
 			<to-view-id>/page/estoque.xhtml</to-view-id>
-			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>lista_livros</from-outcome>
@@ -109,7 +108,10 @@
 			<from-action>#{estoqueListView.removeItem}</from-action>
 			<from-outcome>estoque</from-outcome>
 			<to-view-id>/page/estoque.xhtml</to-view-id>
-			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>add_item</from-outcome>
+			<to-view-id>/page/estoque/add_item.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -118,7 +120,6 @@
 		<navigation-case>
 			<from-outcome>add_item</from-outcome>
 			<to-view-id>/page/estoque/add_item.xhtml</to-view-id>
-			<redirect />
 		</navigation-case>
 	</navigation-rule>
 

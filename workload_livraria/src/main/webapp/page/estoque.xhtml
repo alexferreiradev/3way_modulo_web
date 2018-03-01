@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="title-head">Livros</ui:define>
 	<ui:define name="content">
-		<h:form>
+		<h:form id="form">
 			<p:toolbar>
 				<f:facet name="left">
 					<h1>Estoque</h1>
@@ -19,9 +19,10 @@
 				<f:facet name="header">
 					<h1>Produtos</h1>
 				</f:facet>
+				
 				<h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
 					<p:graphicImage url="/imagem/livro_padrao.png" height="60px" width="60px" />
-
+					
 					<p:outputPanel>
 						<h:panelGrid columns="2" cellpadding="2">
 							<h:outputText value="Título:" />
@@ -33,8 +34,8 @@
 							<h:outputText value="Disponivel:" />
 							<h:outputText value="#{item.disponivel}" style="font-weight: bold" />
 
-							<p:commandButton action="editar" value="Editar" disabled="true" />
-							<p:commandButton update=":removeConfirmInfo" oncomplete="PF('removeConfirm').show()"
+							<p:commandButton action="#{estoqueListView.editar()}" value="Editar" disabled="false" />
+							<p:commandButton update=":form:removeConfirmInfo" oncomplete="PF('removeConfirm').show()"
 								value="X">
 								<f:setPropertyActionListener value="#{item}" target="${estoqueListView.selectedItem}" />
 							</p:commandButton>
@@ -50,7 +51,7 @@
 						<p:graphicImage name="/imagem/remover.png" alt="img_remover" />
 						<h:outputText
 							value="Deseja remover o livro do estoque: #{estoqueListView.selectedItem.livro.titulo}?" />
-						<p:commandButton action="#{estoqueListView.removeItem()}" value="Remover" />
+						<p:commandButton action="#{estoqueListView.removaItem()}" value="Remover" />
 					</h:form>
 				</p:outputPanel>
 			</p:dialog>

@@ -7,23 +7,30 @@
 	<ui:define name="content">
 		<p:commandButton action="add_estoque_item" value="Adicionar item" />
 		<h:form>
+			<p:messages id="messages" />
 			<p:outputLabel for="advanced" value="Livros:" />
-			<p:selectOneListbox id="advanced" value="#{addLivroView.selectedLivro}" converter="livroConverter"
-				var="l" filter="true" filterMatchMode="contains">
-				<f:selectItems value="#{livroService.listeLivros()}" var="livro" itemLabel="#{livro.titulo}"
-					itemValue="#{livro}" />
-				<p:column>
-					<h:outputText value="#{l.id}" />
-				</p:column>
-				<p:column>
-					<h:outputText value="#{l.titulo}" />
-				</p:column>
-			</p:selectOneListbox>
-			
-			<p:outputLabel for="quantidade" value="Quantidade no estoque:" />
-			<p:spinner id="quantidade" value="#{addLivroView.quantidade}" min="1" required="true" requiredMessage="Digite uma quantidade" />
+			<h:panelGrid columns="3">
+				<p:selectOneListbox id="advanced" value="#{addLivroView.selectedLivro}"
+					converter="livroConverter" var="l" filter="true" filterMatchMode="contains">
+					<f:selectItems value="#{livroService.listeLivros()}" var="livro" itemLabel="#{livro.titulo}"
+						itemValue="#{livro}" />
+					<p:column>
+						<h:outputText value="#{l.id}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{l.titulo}" />
+					</p:column>
+				</p:selectOneListbox>
+				<h:message for="advanced"></h:message>
+				<h:message for="advanced"></h:message>
+				
+				<p:outputLabel for="quantidade" value="Quantidade no estoque:" />
+				<p:spinner id="quantidade" value="#{addLivroView.quantidade}" required="true"
+					requiredMessage="Digite uma quantidade" />
+				<p:message id="message" for="quantidade" />
+			</h:panelGrid>
 
-			<p:commandButton action="#{addLivroView.addLivro()}" value="Adicionar" />
+			<h:commandButton action="#{addLivroView.addLivro()}" value="Adicionar" />
 		</h:form>
 	</ui:define>
 </ui:composition>

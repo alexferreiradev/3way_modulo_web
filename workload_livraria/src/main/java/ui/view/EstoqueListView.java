@@ -20,7 +20,7 @@ public class EstoqueListView {
 		// todo Auto-generated constructor stub
 	}
 	
-	public void removeItem() {
+	public void removaItem() {
 		try {			
 			estoqueService.removeItem(selectedItem.createItemFromDto());
 			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "item removido do estoque: ", String.valueOf(selectedItem.getId())));
@@ -28,6 +28,12 @@ public class EstoqueListView {
 			L.error("Erro no sistema: " + e.getMessage());
 			fc.addMessage("messages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao tentar remover item do estoque.", ""));
 		}
+	}
+	
+	public String editar() {
+		FacesContext.getCurrentInstance().addMessage("messages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Funcao nao implementada.", "details"));
+		L.info("Chamou editar");
+		return "estoque";
 	}
 
 	public EstoqueService getEstoqueService() {

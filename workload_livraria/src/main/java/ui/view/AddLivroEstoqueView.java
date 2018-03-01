@@ -15,20 +15,22 @@ public class AddLivroEstoqueView {
 	
 	private FacesContext fc = FacesContext.getCurrentInstance();
 	private Livro selectedLivro;
-	private int quantidade = 1;
+	private int quantidade;
 	private EstoqueService estoqueService;
 	
 	public String addLivro() {
+		L.info("Add livro feito");
 		try {
 			ItemEstoque item = new ItemEstoque();
 			item.setLivro(this.selectedLivro);
 			item.setQuantidade(quantidade);
 			
 			estoqueService.addItem(item);
-			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "item adicionado ao estoque.", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "item adicionado ao estoque.", "detail"));
+			L.info("Add livro feito");
 		} catch (Exception e) {
 			L.error("Erro no sistema");
-			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao tentar adicionar item ao estoque.", null));
+			fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao tentar adicionar item ao estoque.", "erro"));
 		}
 		
 		return "estoque";
